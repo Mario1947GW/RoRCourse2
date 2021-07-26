@@ -1,27 +1,31 @@
-<style>
-a{
-  text-decoration:none;
-}
-</style>
 <h1>Artykuły</h1>
+<%
+=begin%>
+ <%= articles_url%> // Ścieżka do /articles
+<%
+=end%>
+
 <table>
   <thead>
     <tr>
       <th>Tytuł</th>
       <th>Opis</th>
-      <th>Akcje</th>
+      <th colspan=3>Akcje</th>
     </tr>
   </thead>
 
   <tbody> 
-  <% @articles.each do |article|  %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.description %></td>
-      <td><button><a href="/articles/<%= article.id %>">Pokaż</a></button></td>
-      <td><button><a href="/articles/<%= article.id %>/edit">Edytuj</a></button></td>
+    <% @articles.each do |article|  %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.description %></td>
+        <td><button><%= link_to "Pokaż", article_path(article) %></button></td>
+        <td><button><%= link_to "Edytuj", edit_article_path(article) %></button></td>
+        <td><button><%= link_to "Usuń", article_path(article), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"} %></button></td>
 
-    </tr>
-  <% end %>    
+      </tr>
+    <% end %>    
   </tbody>
+  
 </table>
+<button><%= link_to "Dodaj nowy artykuł",new_article_path %></button>

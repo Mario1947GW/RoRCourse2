@@ -25,4 +25,13 @@
   <p>
     <%= f.submit%>
   </p>
+
+  <p>
+    <button><%= link_to "Usuń", article_path(@article), method: :delete %></button>
+  </p>
+
+  <p>
+      <button><%= link_to "Wróć", articles_path%></button>
+  </p>
+
 <% end %>
