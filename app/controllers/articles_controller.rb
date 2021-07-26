@@ -48,9 +48,8 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  private
-  
   def get_article
     params.require(:article).permit(:title, :description)
   end
+  
 end

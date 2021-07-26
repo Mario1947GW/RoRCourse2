@@ -1,31 +1,6 @@
 <h1>Dodaj nowy artykuł</h1>
-<% if @article%>
-  <% if @article.errors.any? %>
-    <h2>Następujące błędy uniemożliwiły zapis artykułu</h2>
-    <ul>
-      <% @article.errors.full_messages.each do |message| %>
-      <li><%= message %></li> 
-      <% end %>
-    </ul>
-  <% end %>
-<% end%>
+<%= render 'layouts/article_form' %>
 
-<%= form_with scope: :article, url: articles_path, local: true do |f|%>
-  
-  <p>  
-    <%= f.label :title %><br/>
-    <%= f.text_field :title %> 
-  </p>
-
-  <p>  
-    <%= f.label :description %><br/>
-    <%= f.text_area :description %> 
-  </p>
-
-  <p>
-    <%= f.submit%>
-  </p>
-<% end %>
 <p>
   <button><%= link_to "Wróć", articles_path%></button>
 </p>

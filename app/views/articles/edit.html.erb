@@ -1,37 +1,7 @@
 <h1>Edytuj artykuł</h1>
-<% if @article%>
-  <% if @article.errors.any? %>
-    <h2>Następujące błędy uniemożliwiły zapis artykułu</h2>
-    <ul>
-      <% @article.errors.full_messages.each do |message| %>
-      <li><%= message %></li> 
-      <% end %>
-    </ul>
-  <% end %>
-<% end%>
 
-<%= form_with(model: @article, local: true) do |f|%>
-  
-  <p>  
-    <%= f.label :title %><br/>
-    <%= f.text_field :title %> 
-  </p>
+  <%= render 'layouts/article_form'%>
+<p>
+    <button><%= link_to "Wróć", articles_path%></button>
+</p>
 
-  <p>  
-    <%= f.label :description %><br/>
-    <%= f.text_area :description %> 
-  </p>
-
-  <p>
-    <%= f.submit%>
-  </p>
-
-  <p>
-    <button><%= link_to "Usuń", article_path(@article), method: :delete %></button>
-  </p>
-
-  <p>
-      <button><%= link_to "Wróć", articles_path%></button>
-  </p>
-
-<% end %>
