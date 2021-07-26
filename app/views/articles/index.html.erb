@@ -1,3 +1,8 @@
+<style>
+a{
+  text-decoration:none;
+}
+</style>
 <h1>Artykuły</h1>
 <table>
   <thead>
@@ -14,6 +19,8 @@
       <td><%= article.title %></td>
       <td><%= article.description %></td>
       <td><button><a href="/articles/<%= article.id %>">Pokaż</a></button></td>
+      <td><button><a href="/articles/<%= article.id %>/edit">Edytuj</a></button></td>
+
     </tr>
   <% end %>    
   </tbody>
