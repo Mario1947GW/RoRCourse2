@@ -4,9 +4,9 @@
 <li><h1>Opis </h1><%= @article.description %> </li>
 
 <p>
-    <button><%= link_to "Edytuj", "/articles/#{params[:id]}/edit"%></button>
+    <button><%= link_to "Edytuj", edit_article_path(@article)%></button>
     <button><%= link_to "Usuń", article_path(@article), method: :delete ,data: { confirm: "Na pewno chcesz usunąć artykuł?"}%></button>
-    <button><%= link_to "Wróć", articles_path%></button>
+    <button><%= link_to "Wróć", articles_path %></button>
 </p>
 
 </ul>
