@@ -1,0 +1,14 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+#navbar {
+  background-color: rgb(212, 247, 238) !important;
+}
+.container-fluid {
+  background-color: rgb(192, 235, 235) !important;
+}
+.nav-link,.navbar-brand {
+  color: white !important;
+}
+.nav-link:hover,.navbar-brand:hover {
+  color: rgb(99, 99, 99) !important;
+}
