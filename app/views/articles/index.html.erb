@@ -1,11 +1,10 @@
-<div id="page-content">
   <h1 class= "text-center">Artykuły</h1>
   <p class="text-center">
     <button class="btn btn-primary"><%= link_to "Dodaj nowy artykuł",new_article_path, class: "text-center text-white text-decoration-none"%></button>
   </p>
 
   <% @articles.each do |article| %>
-    <div class="row justify-content-md-center mb-5 ">
+    <div class="row justify-content-md-center  ">
       <div class="col-8">
         <div class="card text-center shadow mb-5 bg-white rounded">
           <div class="card-header">
@@ -21,10 +20,9 @@
           </div>
         
           <div class="card-footer text-muted">
-            Utworzono: <%= article.created_at %> zmodyfikowano: <%= article.updated_at %>
+            Utworzono: <%= time_ago_in_words(article.created_at) %> temu | zmodyfikowano: <%= time_ago_in_words(article.updated_at)  %> temu
           </div>
         </div>
       </div>
     </div>
   <% end %>
-</div>
