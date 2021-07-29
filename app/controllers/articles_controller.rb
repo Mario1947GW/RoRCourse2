@@ -18,6 +18,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(get_article)
+    # tymczasowo
+    @article.user = User.first
     if @article.save
       flash[:notice] = "Pomyślnie zapisano artykuł" 
       redirect_to @article
@@ -28,6 +30,8 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(get_article)
+      # tymczasowo
+      @article.user = User.first
       flash[:notice] = "Pomyślnie zmieniono artykuł" 
       redirect_to @article
     else
