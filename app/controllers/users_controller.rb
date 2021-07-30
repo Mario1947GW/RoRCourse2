@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   
   before_action :find_user_from_params_id, only: [:show, :edit, :update, :destroy]
 
+  def show
+    @articles = @user.articles
+  end
+
   def new
     @user = User.new
   end
@@ -19,7 +23,6 @@ class UsersController < ApplicationController
       render 'new'    
     end
   end
-
 
   def update
     find_user_from_params_id
