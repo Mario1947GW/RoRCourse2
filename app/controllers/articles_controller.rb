@@ -42,7 +42,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    return redirect_to articles_path if current_user != @article.user
     if @article.destroy
       flash[:notice] = "Pomyślnie usunięto artykuł"
       redirect_to articles_path
@@ -62,7 +61,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @article.user
+    if current_user != @article.user && !current_user.admin?
       redirect_to articles_path
     end
   end

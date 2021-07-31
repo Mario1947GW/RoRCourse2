@@ -9,8 +9,16 @@
             Artykuły użytkownika: <%=user.articles.count%> 
             <p class="card-text"></p>
               <button class="btn btn-outline-info"><%= link_to "Pokaż profil", user_path(user),class: " text-decoration-none " %></button>
-              <% if logged_in? && current_user.username == user.username%>
-               <button class="btn btn-outline-secondary"><%= link_to "Edytuj profil", edit_user_path(user),class: " text-decoration-none "%></button>
+              <% if logged_in? %>
+                <% if current_user == user%>
+                  <button class="btn btn-outline-secondary"><%= link_to "Edytuj profil", edit_user_path(user),class: " text-decoration-none "%></button>
+                <% end %>
+                <% if current_user.admin? %>
+                <%= button_to "Usuń profil", user_path(user),
+                class: "btn btn-outline-danger", 
+                method: :delete,
+                data:{confirm: "Czy na pewno chcesz usunąć ten profil?"}%>
+                <% end %>
               <% end %>
           </div>
           <div class="card-footer text-muted">
