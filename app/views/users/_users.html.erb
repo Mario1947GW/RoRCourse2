@@ -1,0 +1,22 @@
+  <% @users.each do |user| %>
+    <div class="row justify-content-md-center  ">
+      <div class="col-8">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header">
+          <h5 class="text-black-50"><%= link_to user.username,user_path(user),class: "text-decoration-none" %></h5>
+          </div>
+          <div class="card-body">
+            Artykuły użytkownika: <%=user.articles.count%> 
+            <p class="card-text"></p>
+              <button class="btn btn-outline-info"><%= link_to "Pokaż profil", user_path(user),class: " text-decoration-none " %></button>
+              <% if logged_in? && current_user.username == user.username%>
+               <button class="btn btn-outline-secondary"><%= link_to "Edytuj profil", edit_user_path(user),class: " text-decoration-none "%></button>
+              <% end %>
+          </div>
+          <div class="card-footer text-muted">
+            Dołączył: <%= time_ago_in_words(user.created_at)%> temu
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

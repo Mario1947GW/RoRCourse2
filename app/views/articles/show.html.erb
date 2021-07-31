@@ -1,22 +1,23 @@
 <h2 class="text-center"><%= @article.title%></h2>
-  <div class="row justify-content-md-center ">
-    <div class="col-8">
-      <div class="card text-center shadow mb-5 mt-5 bg-white rounded">
-        <div class="card-header">
-          <h5 class="text-black-50">Artykuł napisany przez:</h2> <h3><%=@article.user.username%></h3>
-        </div>
-        <div class="card-body">
-          <div class="card-text text-start"><%= simple_format(@article.description) %></div>
-            <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_article_path(@article),class: " text-decoration-none "%></button>
-            <button class="btn btn-outline-danger"><%= link_to "Usuń", article_path(@article), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"},class: " text-decoration-none text-danger" %></button>
-        </div>
-      
-        <div class="card-footer text-muted">
-          Utworzono: <%= time_ago_in_words(@article.created_at) %> temu | zmodyfikowano: <%= time_ago_in_words(@article.updated_at)  %> temu
-        </div>
+<div class="row justify-content-md-center ">
+  <div class="col-8">
+    <div class="card text-center shadow mb-5 mt-5 bg-white rounded">
+      <div class="card-header">
+        <h5 class="text-black-50">Artykuł napisany przez:</h2>  <h3><%=link_to @article.user.username, user_path(@article.user), class: "text-decoration-none"%></h3>
       </div>
-        <p class="text-center">
-          <button class="btn btn-primary"><%= link_to "Dodaj nowy artykuł",new_article_path, class: "text-center text-white text-decoration-none"%></button>
-        </p>
+      <div class="card-body">
+        <div class="card-text text-start"><%= simple_format(@article.description) %></div>
+          <% if logged_in? && current_user == @article.user%>
+              <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_article_path(@article),class: " text-decoration-none "%></button>
+              <%= button_to "Usuń", article_path(@article), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"},class: " btn btn-outline-danger text-decoration-none" %>
+          <% end %>
+        </div>
+      <div class="card-footer text-muted">
+        Utworzono: <%= time_ago_in_words(@article.created_at) %> temu | zmodyfikowano: <%= time_ago_in_words(@article.updated_at)  %> temu
+      </div>
     </div>
+      <p class="text-center">
+        <button class="btn btn-primary"><%= link_to "Dodaj nowy artykuł",new_article_path, class: "text-center text-white text-decoration-none"%></button>
+      </p>
   </div>
+</div>

@@ -1,6 +1,12 @@
-  <h1 class= "text-center">Artykuły</h1>
-  <p class="text-center">
-    <button class="btn btn-primary"><%= link_to "Dodaj nowy artykuł",new_article_path, class: "text-center text-white text-decoration-none"%></button>
-  </p>
+<h1 class= "text-center">Artykuły</h1>
+<p class="text-center">
+  <button class="btn btn-primary"><%= link_to "Dodaj nowy artykuł",new_article_path, class: "text-center text-white text-decoration-none"%></button>
+</p>
 
-<%= render 'article' %>
+<div class="flickr_pagination">
+  <%= will_paginate @articles, :container => false %>
+</div>
+<%= render 'articles' %>
+<div class="flickr_pagination">
+  <%= will_paginate @articles, :container => false %>
+</div>

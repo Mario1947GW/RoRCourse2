@@ -6,42 +6,46 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <%
-=begin%>
- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Strona główna</a>
+
+        <li class="nav-item">
+         <%= link_to "Użytkownicy", users_path,class: "nav-link" %>
         </li> 
-<%
-=end%>
-        <%
-=begin%>
- <li class="nav-item">
-         <%= link_to "Artykuły", articles_path,class: "nav-link" %>
-        </li> 
-<%
-=end%>
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href=<%=articles_path%> id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href=<%=articles_path%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Artykuły
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbar-dropdown-articles">
             <%= link_to "Artykuły", articles_path, class: "dropdown-item"%>
-            <%= link_to "Nowy artykuł", new_article_path, class: "dropdown-item"%>
-            <%
-=begin%>
- <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> 
-<%
-=end%>
+            <% if logged_in?%>
+              <%= link_to "Nowy artykuł", new_article_path, class: "dropdown-item"%>
+            <% end%>
           </div>
         </li>
-        <%
-=begin%>
- <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
+        <% if logged_in? %>
+        <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href=<%=user_path(current_user)%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.username %>
+          </a>
+            <div class="dropdown-menu" aria-labelledby="navbar-dropdown-user">
+                <%= link_to "Zobacz profil", user_path(current_user), class: "dropdown-item"  %>
+                <%= link_to "Edytuj profil", edit_user_path(current_user), class: "dropdown-item"  %>
+            </div>
+        </li>
+
+          <li class="nav-item">
+            <%= link_to "Wyloguj", logout_path, class: "nav-link", method: :delete %>
+          </li> 
+        <% else %>  
+        <li class="nav-item">
+          <%= link_to "Logowanie", login_path, class: "nav-link" %>
         </li> 
-<%
-=end%>
+         <li class="nav-item">
+          <%= link_to "Rejestracja", signup_path, class: "nav-link" %>
+        </li> 
+        <% end%>
+
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

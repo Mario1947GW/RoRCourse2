@@ -1,16 +1,18 @@
 class ArticlesController < ApplicationController
   
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def show
   end
 
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   def new
-    @article = Article.new
+      @article = Article.new
   end
 
   def edit
@@ -19,7 +21,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(get_article)
     # tymczasowo
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:notice] = "Pomyślnie zapisano artykuł" 
       redirect_to @article
@@ -31,7 +33,7 @@ class ArticlesController < ApplicationController
   def update
     if @article.update(get_article)
       # tymczasowo
-      @article.user = User.first
+      @article.user = current_user
       flash[:notice] = "Pomyślnie zmieniono artykuł" 
       redirect_to @article
     else
@@ -40,6 +42,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    return redirect_to articles_path if current_user != @article.user
     if @article.destroy
       flash[:notice] = "Pomyślnie usunięto artykuł"
       redirect_to articles_path
@@ -56,6 +59,12 @@ class ArticlesController < ApplicationController
 
   def get_article
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      redirect_to articles_path
+    end
   end
 
 end
