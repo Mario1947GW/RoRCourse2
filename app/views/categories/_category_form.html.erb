@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%=render 'shared/errors', obj: @category %>
+      <%= form_with(model: @category, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f|%>
+        <div class="form-group row">
+          <%= f.label :name , "Nazwa kategorii", class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :name, class: "form-control shadow p-3 mb-3 rounded", placeholder: "Nazwa kategorii" %> 
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <div class="col-2">
+            <%= f.submit(@category.new_record? ? "Stwórz kategorię" : "Zaktualizuj kategorię", class: "btn btn-outline-light btn-lg" ) %>
+          </div>
+        </div>
+      <% end %>    
+    </div>
+    <div class="form-group row justify-content-center">
+      <div class="col-3 mb-3">
+        <%= link_to "[ Wróć do strony z artykułami ]", articles_path, class: "text-info text-decoration-none"%>
+      </div>
+    </div>
+  </div>
+</div>

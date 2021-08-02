@@ -23,6 +23,18 @@
           </div>
         </li>
 
+        <% if logged_in? && current_user.admin? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href=<%=categories_path%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Kategorie
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbar-dropdown-articles">
+              <%= link_to "Kategorie", categories_path, class: "dropdown-item"%>
+                <%= link_to "Nowa kategoria", new_category_path, class: "dropdown-item"%>
+            </div>
+          </li>
+        <% end%>  
+
         <% if logged_in? %>
         <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href=<%=user_path(current_user)%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">

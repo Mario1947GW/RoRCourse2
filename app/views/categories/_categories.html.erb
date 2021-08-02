@@ -1,0 +1,21 @@
+
+  <% @categories.each do |category| %>
+    <div class="row justify-content-md-center  ">
+      <div class="col-5">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title "><%= link_to category.name,category_path(category),class: "text-decoration-none "%></h5>
+            <p class="card-text"><%= category.name %></p>
+              <button class="btn btn-outline-info"><%= link_to "Pokaż", category_path(category),class: " text-decoration-none " %></button>
+              <% if logged_in? && current_user.admin? %>
+                <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_category_path(category),class: " text-decoration-none "%></button>
+                <%= button_to "Usuń", category_path(category), data: {confirm: "Na pewno chcesz usunąć kategorię?"}, method: :delete, class: " btn btn-outline-danger text-decoration-none"%>
+              <% end%>
+          </div>
+          <div class="card-footer text-muted">
+            Utworzono: <%= time_ago_in_words(category.created_at) %> temu | zmodyfikowano: <%= time_ago_in_words(category.updated_at)  %> temu
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

@@ -1,7 +1,7 @@
 require 'bcrypt'
 class UsersController < ApplicationController
   
-  before_action :find_user_from_params_id, only: [:show, :edit, :update, :destroy]
+  before_action :find_user_by_params_id, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:edit, :destroy]
   before_action :require_same_user, only: [:edit, :update, :destroy]
   def show
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    find_user_from_params_id
+    find_user_by_params_id
     if @user.update(get_user_params)
       flash[:notice] = "Pomyślnie zmodyfikowano dane użytkownika"
       redirect_to @user
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password)
   end
 
-  def find_user_from_params_id
+  def find_user_by_params_id
     @user = User.find(params[:id])
   end
 
