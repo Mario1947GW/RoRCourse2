@@ -12,7 +12,8 @@ class ArticlesController < ApplicationController
   end
 
   def new
-      @article = Article.new
+    @article = Article.new
+    @categories = Category.all
   end
 
   def edit
@@ -20,7 +21,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(get_article)
-    # tymczasowo
     @article.user = current_user
     if @article.save
       flash[:notice] = "Pomyślnie zapisano artykuł" 
@@ -32,7 +32,6 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(get_article)
-      # tymczasowo
       @article.user = current_user
       flash[:notice] = "Pomyślnie zmieniono artykuł" 
       redirect_to @article
@@ -57,7 +56,7 @@ class ArticlesController < ApplicationController
   end
 
   def get_article
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, category_ids: [])
   end
 
   def require_same_user
