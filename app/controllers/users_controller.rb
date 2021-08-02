@@ -32,7 +32,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    find_user_by_params_id
     if @user.update(get_user_params)
       flash[:notice] = "Pomyślnie zmodyfikowano dane użytkownika"
       redirect_to @user

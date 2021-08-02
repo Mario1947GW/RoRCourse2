@@ -11,11 +11,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-    
   end
   
   def create
@@ -29,9 +27,18 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    if @category.update(get_category_params)
+      flash[:notice] = "Pomyślnie zmodyfikowano kategorię"
+      redirect_to @category
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @category.destroy
+    flash[:notice] = "Pomyślnie usunięto kategorię"
+    redirect_to categories_path
   end
 
   private

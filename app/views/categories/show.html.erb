@@ -3,24 +3,19 @@
   <div class="col-8">
     <div class="card text-center shadow mb-4 mt-4 bg-white rounded">
       <h5 class="card-title mt-3 "><%= link_to @category.name,category_path(@category),class: "text-decoration-none "%></h5>
+      <p class="card-text">Artykuły o tej kategorii: <%= @category.articles.count %></p>
       <div class="card-body">
-        
-          <% if logged_in? && current_user.admin?%>
-              <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_category_path(@category),class: " text-decoration-none "%></button>
-              <%= button_to "Usuń", category_path(@category), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"},class: " btn btn-outline-danger text-decoration-none" %>
-          <% end %>
-
+        <% if logged_in? && current_user.admin?%>
+            <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_category_path(@category),class: " text-decoration-none "%></button>
+            <%= button_to "Usuń", category_path(@category), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"},class: " btn btn-outline-danger text-decoration-none" %>
+        <% end %>
       <div class="card-footer text-muted">
         Utworzono: <%= time_ago_in_words(@category.created_at) %> temu | zmodyfikowano: <%= time_ago_in_words(@category.updated_at)  %> temu
       </div>
     </div>
-    
   </div>  
-  
-  <p class="text-center">
-    <button class="btn btn-primary"><%= link_to "Dodaj nową kategorię",new_category_path, class: "text-center text-white text-decoration-none"%></button>
-  </p>
-
+  <h3 class="text-center mb-4 ">Artykuły kategorii <%= @category.name %>:</h2>
+  <%= render 'categories_articles'%>
   <div class="form-group row justify-content-center">
     <div class="col-3 mb-3">
       <%= link_to "[ Wróć do strony z kategoriami ]", articles_path, class: "text-info text-decoration-none"%>
