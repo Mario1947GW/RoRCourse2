@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <div class="card-text text-start"><%= simple_format(@article.description) %></div>
-          <% if logged_in? && (current_user == @article.user || current_user.admin?)%>
+          <% if logged_in? && (current_user == @article.user || current_user_admin?)%>
               <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_article_path(@article),class: " text-decoration-none "%></button>
               <%= button_to "Usuń", article_path(@article), method: :delete,data: { confirm: "Na pewno chcesz usunąć artykuł?"},class: " btn btn-outline-danger text-decoration-none" %>
           <% end %>

@@ -6,7 +6,7 @@
           <h5 class="card-title "><%= link_to category.name,category_path(category),class: "text-decoration-none "%></h5>
           <p class="card-text">Artykuły o tej kategorii: <%= category.articles.count %></p>
             <button class="btn btn-outline-info"><%= link_to "Pokaż", category_path(category),class: " text-decoration-none " %></button>
-            <% if logged_in? && current_user.admin? %>
+            <% if logged_in? && current_user_admin? %>
               <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_category_path(category),class: " text-decoration-none "%></button>
               <%= button_to "Usuń", category_path(category), data: {confirm: "Na pewno chcesz usunąć kategorię?"}, method: :delete, class: " btn btn-outline-danger text-decoration-none"%>
             <% end%>

@@ -23,7 +23,7 @@
           </div>
         </li>
 
-        <% if logged_in? && current_user.admin? %>
+        <% if logged_in? && current_user_admin? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href=<%=categories_path%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Kategorie
@@ -38,7 +38,7 @@
         <% if logged_in? %>
         <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href=<%=user_path(current_user)%> id="navbar-dropdown-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           <%= "[Admin] " if current_user.admin? %><%= current_user.username %>
+           <%= "[Admin] " if current_user_admin? %><%= current_user.username %>
           </a>
             <div class="dropdown-menu" aria-labelledby="navbar-dropdown-user">
                 <%= link_to "Zobacz profil", user_path(current_user), class: "dropdown-item" %>

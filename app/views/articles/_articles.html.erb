@@ -14,7 +14,7 @@
           <h5 class="card-title "><%= link_to article.title,article_path(article),class: "text-decoration-none "%></h5>
           <p class="card-text"><%= truncate((article.description), length: 100) %></p>
             <button class="btn btn-outline-info"><%= link_to "Pokaż", article_path(article),class: " text-decoration-none " %></button>
-            <% if logged_in? && (current_user == article.user || current_user.admin?)  %>
+            <% if logged_in? && (current_user == article.user || current_user_admin?)  %>
               <button class="btn btn-outline-secondary"><%= link_to "Edytuj", edit_article_path(article),class: " text-decoration-none "%></button>
               <%= button_to "Usuń", article_path(article), data: {confirm: "Na pewno chcesz usunąć artykuł?"}, method: :delete, class: " btn btn-outline-danger text-decoration-none"%>
             <% end%>

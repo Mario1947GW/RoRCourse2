@@ -52,7 +52,7 @@ class CategoriesController < ApplicationController
   end
   
   def require_admin
-    redirect_to articles_path if !(logged_in? && current_user.admin?) || !logged_in?
+    redirect_to articles_path if !(logged_in? && current_user_admin?) || !logged_in?
   end
 
 end

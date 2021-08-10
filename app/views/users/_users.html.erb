@@ -13,7 +13,7 @@
                 <% if current_user == user%>
                   <button class="btn btn-outline-secondary"><%= link_to "Edytuj profil", edit_user_path(user),class: " text-decoration-none "%></button>
                 <% end %>
-                <% if current_user.admin? %>
+                <% if current_user_admin? %>
                 <%= button_to "Usuń profil", user_path(user),
                 class: "btn btn-outline-danger", 
                 method: :delete,
